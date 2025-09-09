@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<div class="w-full max-w-5xl bg-white p-8 rounded-2xl shadow-lg">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">🎓 Student List</h2>
+        <a href="/add"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md transition">
+            ➕ Add Student
+        </a>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+            <thead class="bg-gray-800 text-white">
+            <tr>
+                <th class="px-4 py-3 text-left">ID</th>
+                <th class="px-4 py-3 text-left">Name</th>
+                <th class="px-4 py-3 text-left">Email</th>
+                <th class="px-4 py-3 text-left">Course</th>
+                <th class="px-4 py-3 text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+            <tr th:each="student : ${students}" class="hover:bg-gray-50">
+                <td class="px-4 py-3" th:text="${student.id}"></td>
+                <td class="px-4 py-3 font-medium text-gray-700" th:text="${student.name}"></td>
+                <td class="px-4 py-3 text-gray-600" th:text="${student.email}"></td>
+                <td class="px-4 py-3 text-gray-600" th:text="${student.course}"></td>
+                <td class="px-4 py-3 text-center space-x-2">
+                    <a th:href="@{'/edit/' + ${student.id}}"
+                       class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded shadow-sm transition">
+                        ✏ Edit
+                    </a>
+                    <a th:href="@{'/delete/' + ${student.id}}"
+                       class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded shadow-sm transition">
+                        🗑 Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
